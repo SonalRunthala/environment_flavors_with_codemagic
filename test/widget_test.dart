@@ -12,32 +12,14 @@ import 'package:testtwentysix/app_widget.dart';
 import 'package:testtwentysix/main_common.dart';
 
 void main() {
+  setUpAll(() {
+    // This setup code has an error
+    throw Exception("Failed to initialize something critical for tests");
+  });
 
-  test(
-"1+1 == 2" , ()async{
-    expect  (1+1 ==2, true);
+  test("1+1 == 2", () {
+    // This test will never even run because setUpAll failed.
+    // The test runner will mark it as failed.
+    expect(1 + 1 == 2, true);
+  });
 }
-);
-  // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-  //   // Build our app and trigger a frame.
-  //   await tester.pumpWidget(const MyApp());
-  //
-  //   // Verify that our counter starts at 0.
-  //   expect(find.text('0'), findsOneWidget);
-  //   expect(find.text('1'), findsNothing);
-  //
-  //   // Tap the '+' icon and trigger a frame.
-  //   await tester.tap(find.byIcon(Icons.add));
-  //   await tester.pump();
-  //
-  //   // Verify that our counter has incremented.
-  //   expect(find.text('0'), findsNothing);
-  //   expect(find.text('1'), findsOneWidget);
-  // });
-}
-
-// test(
-// "1+1 == 2" , ()async{
-//   except  (1+1 ==2, true);
-// }
-// );
